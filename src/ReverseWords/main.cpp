@@ -5,6 +5,7 @@
 #include "../codejam.hpp"
 
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -36,13 +37,22 @@ private:
 // +----------+
 void ReverseWords::get_test() 
 {
-  // clear data for new test
-  m_data.clear();
+  static bool first_call = true;
 
-  int N;
-  m_in >> N;
+  std::string line;
+  if ( first_call ) {
+    // at the end of first line, must advance
+    std::getline( m_in, line );
+    first_call = false;
+  }
+  else
+    // clear data for new test
+    m_data.clear();
+
   std::string word;
-  while ( m_in >> word )
+  std::getline( m_in, line );
+  std::istringstream iss( line );
+  while ( iss >> word )
     m_data.push_back( word );
 
 }
@@ -72,10 +82,12 @@ void ReverseWords::solve()
 // +--------------+
 void ReverseWords::write_output( int i ) 
 {
-  std::vector< std::string >::const_reverse_iterator it;
-  for ( it=m_data.rbegin(); it!=m_data.rend(); it++ )
-    m_out << *it << " ";
+
+  m_out << "Case #" << i << ": ";
+  for ( int i=m_data.size()-1; i>=0; i-- )
+    m_out << m_data[i] << " ";
   m_out << std::endl;
+
 }
 
 // +------+
