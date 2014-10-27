@@ -18,3 +18,9 @@ target_link_libraries( storecredit codejamhelper )
 add_executable( minscalprod src/MinimumScalarProduct/main.cpp )
 target_link_libraries( minscalprod codejamhelper )
 
+# +---------------+
+# | Reverse Words |
+# +---------------+
+add_executable( reversewords src/ReverseWords/main.cpp )
+target_link_libraries( reversewords codejamhelper )
+
